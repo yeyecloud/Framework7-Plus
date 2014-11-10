@@ -2035,6 +2035,14 @@ app.initScroller = function(pageContainer) {
     });
     pageContainer.scroller = scroller;
 };
+app.refreshScroller = function(container) { //如果未传入container，则取当前显示的page
+    var $container = $(container);
+    if($container[0]) {
+        $container[0].scroller.refresh();
+    } else {
+        app.mainView.refreshScroller();
+    }
+}
 app.scrollTop = function(element, scrollTop, time) {
     var $element = $(element);
     time = time || 0;
