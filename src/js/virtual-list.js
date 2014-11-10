@@ -24,6 +24,7 @@ var VirtualList = function (listBlock, params) {
         else if (typeof params.template === 'function') vl.template = params.template;
     }
     vl.pageContent = vl.listBlock.parents('.page-content');
+    vl.page = vl.pageContent.parent();
 
     // Bad scroll
     var updatableScroll;
@@ -67,7 +68,7 @@ var VirtualList = function (listBlock, params) {
         }
         if (typeof resetScrollTop === 'undefined') resetScrollTop = true;
         if (resetScrollTop) {
-            vl.pageContent[0].scrollTop = 0;
+            app.scrollTop(vl.page, 0);
         }
         vl.update();
     };
@@ -104,13 +105,14 @@ var VirtualList = function (listBlock, params) {
 
         if (updatableScroll) {
             vl.ul.css({height: listHeight + 'px'});
+            vl.page[0].scroller.refresh();
         }
     };
 
     // Render items
     vl.render = function (force) {
         if (force) vl.lastRepaintY = null;
-        var scrollTop = vl.pageContent[0].scrollTop;
+        var scrollTop = app.getScrollTop(vl.page);
         if (vl.lastRepaintY === null || Math.abs(scrollTop - vl.lastRepaintY) > maxBufferHeight || (!updatableScroll && (scrollTop + pageHeight >= vl.pageContent[0].scrollHeight))) {
             vl.lastRepaintY = scrollTop;
         }
@@ -210,6 +212,7 @@ var VirtualList = function (listBlock, params) {
         if (vl.params.onItemsBeforeInsert) vl.params.onItemsBeforeInsert(vl, vl.fragment);
         vl.ul[0].appendChild(vl.fragment);
         if (vl.params.onItemsAfterInsert) vl.params.onFragmentAfterInsert(vl, vl.fragment);
+        vl.page[0].scroller.refresh();
     };
 
     // Handle scroll event
@@ -224,7 +227,7 @@ var VirtualList = function (listBlock, params) {
 
     vl.attachEvents = function (detach) {
         var action = detach ? 'off' : 'on';
-        vl.pageContent[action]('scroll', vl.handleScroll);
+        vl.page[0].scroller[action]('scroll', vl.handleScroll);
         $(window)[action]('resize', vl.handleResize);
     };
 

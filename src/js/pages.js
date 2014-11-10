@@ -76,6 +76,7 @@ app.triggerPageCallbacks = function (callbackName, pageName, pageData) {
 app.pageInitCallback = function (view, params) {
     var pageContainer = params.pageContainer;
     if (pageContainer.f7PageInitialized && !view.params.domCache) return;
+    app.initScroller(pageContainer);    //尽早初始化
 
     // Page Data
     var pageData = {
@@ -110,7 +111,6 @@ app.pageInitCallback = function (view, params) {
 
     // Before Init Callbacks
     app.pluginHook('pageBeforeInit', pageData);
-    app.initScroller(pageContainer);    //尽早初始化
     if (app.params.onPageBeforeInit) app.params.onPageBeforeInit(app, pageData);
     app.triggerPageCallbacks('beforeInit', pageData.name, pageData);
     $(pageData.container).trigger('pageBeforeInit', {page: pageData});
