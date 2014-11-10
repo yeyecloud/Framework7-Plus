@@ -56,12 +56,12 @@ app.initPullToRefresh = function (pageContainer) {
             /*jshint validthis:true */
             container.removeClass('transitioning');
             // layer.removeClass('transitioning');
-            if (scrollTop > container[0].offsetHeight) {
+            if (scrollTop > container[0].parentNode.offsetHeight) {
                 isTouched = false;
                 return;
             }
             startTranslate = container.hasClass('refreshing') ? 44 : 0;
-            if (container[0].scrollHeight === container[0].offsetHeight || app.device.os !== 'ios') {
+            if (app.getScrollHeight(container.parent()) === container[0].parentNode.offsetHeight || app.device.os !== 'ios') {
                 useTranslate = true;
             }
             else {

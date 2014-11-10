@@ -291,7 +291,7 @@ app.popover = function (modal, target, removeOnClose) {
         var targetOffset = target.offset();
         var targetParentPage = target.parents('.page');
         if (targetParentPage.length > 0) {
-            targetOffset.top = targetOffset.top - app.getScrollTop(targetParentPage[0]);
+            targetOffset.top = targetOffset.top - targetParentPage[0].scrollTop;   //注意，这里是page的scrollTop，不是pageContent，所以不需要改成scroller
         }
 
         var windowHeight = $(window).height();
