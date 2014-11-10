@@ -110,6 +110,7 @@ app.pageInitCallback = function (view, params) {
 
     // Before Init Callbacks
     app.pluginHook('pageBeforeInit', pageData);
+    app.initScroller(pageContainer);    //尽早初始化
     if (app.params.onPageBeforeInit) app.params.onPageBeforeInit(app, pageData);
     app.triggerPageCallbacks('beforeInit', pageData.name, pageData);
     $(pageData.container).trigger('pageBeforeInit', {page: pageData});
@@ -260,7 +261,7 @@ app.initPage = function (pageContainer) {
     // Init scroll toolbars
     if (app.initScrollToolbars) app.initScrollToolbars(pageContainer);
 
-    app.initScroller(pageContainer);
+    pageContainer.scroller.refresh();
 };
 app.reinitPage = function (pageContainer) {
     // Size navbars on page reinit

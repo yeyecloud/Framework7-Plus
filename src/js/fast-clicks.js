@@ -146,7 +146,7 @@ app.initFastClicks = function () {
                 var parent = this;
                 if (parent.scrollHeight > parent.offsetHeight && !scrollParent) {
                     scrollParent = parent;
-                    scrollParent.f7ScrollTop = scrollParent.scrollTop;
+                    scrollParent.f7ScrollTop = app.getScrollTop(scrollParent);
                 }
             });
         }
@@ -215,7 +215,7 @@ app.initFastClicks = function () {
         trackClick = false;
 
         if (app.device.os === 'ios' && scrollParent) {
-            if (scrollParent.scrollTop !== scrollParent.f7ScrollTop) {
+            if ( app.getScrollTop(scrollParent) !== scrollParent.f7ScrollTop) {
                 return false;
             }
         }

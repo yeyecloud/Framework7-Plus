@@ -150,7 +150,9 @@ app.pullToRefreshDone = function (container) {
         container.removeClass('transitioning pull-up pull-down');
     });
     var page = container.parent()[0];
-    page && page.scroller.refresh();
+    if(page) {
+        page.scroller.refresh();
+    }
 };
 app.pullToRefreshTrigger = function (container) {
     container = $(container);

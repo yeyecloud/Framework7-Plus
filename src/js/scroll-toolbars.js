@@ -27,7 +27,7 @@ app.initScrollToolbars = function (pageContainer) {
         hasTabbar = tabbar && tabbar.length > 0;
 
     var previousScroll, currentScroll;
-        previousScroll = currentScroll = scrollContent[0].scrollTop;
+        previousScroll = currentScroll = app.getScrollTop(pageContainer);
 
     var scrollHeight, offsetHeight, reachEnd, action, navbarHidden, toolbarHidden, tabbarHidden;
 
@@ -37,9 +37,9 @@ app.initScrollToolbars = function (pageContainer) {
 
     function handleScroll(e) {
         if (pageContainer.hasClass('page-on-left')) return;
-        currentScroll = scrollContent[0].scrollTop;
-        scrollHeight = scrollContent[0].scrollHeight;
-        offsetHeight = scrollContent[0].offsetHeight;
+        currentScroll = app.getScrollTop(pageContainer);
+        scrollHeight = app.getScrollHeight(pageContainer);
+        offsetHeight = pageContainer[0].offsetHeight;
         reachEnd = app.params.showBarsOnPageScrollEnd && (currentScroll + offsetHeight >= scrollHeight - bottomBarHeight);
         navbarHidden = navbar.hasClass('navbar-hidden');
         toolbarHidden = toolbar.hasClass('toolbar-hidden');
@@ -95,7 +95,7 @@ app.initScrollToolbars = function (pageContainer) {
             
         previousScroll = currentScroll;
     }
-    scrollContent.on('scroll', handleScroll);
+    pageContainer[0].scroller.on('scroll', handleScroll);
     scrollContent[0].f7ScrollToolbarsHandler = handleScroll;
 };
 app.destroyScrollToolbars = function (pageContainer) {
