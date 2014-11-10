@@ -2035,10 +2035,11 @@ app.initScroller = function(pageContainer) {
     });
     pageContainer.scroller = scroller;
 };
-app.scrollTop = function(element, scrollTop) {
+app.scrollTop = function(element, scrollTop, time) {
     var $element = $(element);
+    time = time || 0;
     if($element[0].scroller) {
-        return $element[0].scroller.scrollTo(0, -1 * scrollTop);
+        return $element[0].scroller.scrollTo(0, -1 * scrollTop, time);
     }
     $element[0].scrollTop = scrollTop;
 };
