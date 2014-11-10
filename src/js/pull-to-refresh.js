@@ -49,7 +49,7 @@ app.initPullToRefresh = function (pageContainer) {
             return;
         }
 
-        scrollTop = container[0].scrollTop;
+        scrollTop = -1 * container[0].parentNode.scroller.y;
         if (typeof wasScrolled === 'undefined' && scrollTop !== 0) wasScrolled = true; 
 
         if (!isMoved) {
@@ -149,6 +149,8 @@ app.pullToRefreshDone = function (container) {
     container.transitionEnd(function () {
         container.removeClass('transitioning pull-up pull-down');
     });
+    var page = container.parent()[0];
+    page && page.scroller.refresh();
 };
 app.pullToRefreshTrigger = function (container) {
     container = $(container);

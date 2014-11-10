@@ -48,6 +48,7 @@ module.exports = function (grunt) {
         'src/js/tabs.js',
         'src/js/accordion.js',
         'src/js/fast-clicks.js',
+        'src/js/iscroll.js',
         'src/js/clicks.js',
         'src/js/resize.js',
         'src/js/forms-handler.js',

@@ -180,6 +180,7 @@ app.pageAnimCallbacks = function (callback, view, params) {
         context: params.context,
         swipeBack: params.swipeBack
     };
+
     var oldPage = params.oldPage,
         newPage = params.newPage;
 
@@ -258,6 +259,8 @@ app.initPage = function (pageContainer) {
     if (app.initMessagebar) app.initMessagebar(pageContainer);
     // Init scroll toolbars
     if (app.initScrollToolbars) app.initScrollToolbars(pageContainer);
+
+    app.initScroller(pageContainer);
 };
 app.reinitPage = function (pageContainer) {
     // Size navbars on page reinit
