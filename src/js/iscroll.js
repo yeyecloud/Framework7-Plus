@@ -2030,7 +2030,7 @@ IScroll.utils = utils;
 
 app.initScroller = function(pageContainer) {
     var scroller = new IScroll(pageContainer, {
-        probeType: 3,
+        probeType: 2,
         mouseWheel: true
     });
     pageContainer.scroller = scroller;
