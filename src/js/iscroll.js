@@ -245,7 +245,7 @@ var utils = (function () {
 
 function IScroll (el, options) {
     this.wrapper = typeof el === 'string' ? document.querySelector(el) : el;
-	this.scroller = $(this.wrapper).find('.page-content')[0];
+	this.scroller = $(this.wrapper).find('.page-content')[0] || $(this.wrapper).find('.slider-container')[0];
     this.scrollerStyle = this.scroller.style;       // cache style for better performance
 
     this.options = {
