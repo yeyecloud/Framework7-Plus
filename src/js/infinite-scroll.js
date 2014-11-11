@@ -7,7 +7,7 @@ function handleInfiniteScroll(pageContainer) {
     var scroller = pageContainer.scroller;
     var scrollTop = app.getScrollTop(pageContainer);
     var scrollHeight = app.getScrollHeight(pageContainer);
-    var height = inf[0].offsetHeight;
+    var height = pageContainer.offsetHeight;
     var distance = inf[0].getAttribute('data-distance');
     var virtualListContainer = inf.find('.virtual-list');
     var virtualList;
@@ -26,12 +26,12 @@ function handleInfiniteScroll(pageContainer) {
 }
 app.attachInfiniteScroll = function (infiniteContent) {
     var pageContainer = $(infiniteContent).parent()[0];
-    pageContainer.scroller.on('scrollEnd', function() {
+    pageContainer.scroller.on('scroll', function() {
         handleInfiniteScroll(pageContainer);
     });
 };
 app.detachInfiniteScroll = function (infiniteContent) {
-    $(infiniteContent).parent()[0].scroller.off('scrollEnd', handleInfiniteScroll);
+    $(infiniteContent).parent()[0].scroller.off('scroll', handleInfiniteScroll);
 };
 
 app.initInfiniteScroll = function (pageContainer) {

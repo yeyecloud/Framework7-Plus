@@ -333,6 +333,7 @@ myApp.onPageInit('infinite-scroll', function (page) {
                 $$('.infinite-scroll .list-block ul').append(data);
                 // Update last loaded index
                 lastLoadedIndex = $$('.infinite-scroll .list-block li').length;
+                myApp.refreshScroller();
             }
         });
     });
