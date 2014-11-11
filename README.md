@@ -5,8 +5,11 @@ Framework7-Plus is forked from Framework7, and it's aim is to make it worked on 
 
 here is a todo list:
 
+common:
+
 - replace native scroller with js scroller, because components that use `position: absolte` and `translate3D` has flicker bug when scroll with native scroller.
 - replace background svg with icon font, because background svg is not supported on some android devices like sumsung note 5
-- rm css `calc`
+- fix CSS `calc`  and `display: flex;` bug
+
 
 I will update this todo list whenever I find a new bug.
