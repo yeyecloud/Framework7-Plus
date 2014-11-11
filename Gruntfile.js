@@ -461,6 +461,12 @@ module.exports = function (grunt) {
                         cwd: 'src/my-app/',
                         src: ['my-app.js'],
                         dest: 'build/js/'
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/fonts/',
+                        src: ['*.eot', '*.tff', '*.woff', '*.svg'],
+                        dest: 'build/fonts/'
                     }
                 ]
             },

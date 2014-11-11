@@ -324,22 +324,23 @@
     }
 
     // Sortable
+
     .sortable-handler {
         position: absolute;
-        right: 0;
-        top: 0;
-        height: ~"-webkit-calc(100% - 1px)";
-        height: ~"calc(100% - 1px)";
-        z-index: 10;
-        background-repeat: no-repeat;
-        background-size: 18px 12px;
-        background-position: center;
-        width: 35px;
-        background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 12' fill='%23c7c7cc'><path d='M0,2V0h22v2H0z'/><path d='M0,7V5h22v2H0z'/><path d='M0,12v-2h22v2H0z'/></svg>");
+        width: 20px;
+        height: 20px;
         opacity: 0;
         visibility: hidden;
-        cursor: pointer;
-        .transition(300ms);
+        right: 0;
+        top: 50%;
+        margin-top: -10px;
+        right: 10px;
+        &:before {
+            font-size: 12px;
+            color: #999;
+            cursor: pointer;
+            .transition(300ms);
+        }
     }
     &.sortable {
         .item-inner {
