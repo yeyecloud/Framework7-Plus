@@ -35,11 +35,9 @@
     
 }
 .pull-to-refresh-content {
+    min-height: 101%;   //because scroller won't bounce when page height <= 100%;
     &.pull-to-refresh-no-navbar {
         margin-top: -44px;
-        height: ~"-webkit-calc(100% + 44px)";
-        height: ~"-moz-calc(100% + 44px)";
-        height: ~"calc(100% + 44px)";
         .pull-to-refresh-layer {
             margin-top: 0;
         }
@@ -53,7 +51,6 @@
         }
     }
     &.refreshing {
-        .translate3d(0,44px,0);
         .pull-to-refresh-arrow {
             visibility: hidden;
             .transition(0ms);

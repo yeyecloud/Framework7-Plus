@@ -654,6 +654,10 @@ IScroll.prototype = {
             return false;
         }
 
+        if(this.options.ptr && this.y >= 44) {
+            y = this.options.ptrOffset || 44;
+            this._execEvent('ptr');
+        }
         this.scrollTo(x, y, time, this.options.bounceEasing);
 
         return true;
@@ -2029,10 +2033,16 @@ IScroll.utils = utils;
 
 
 app.initScroller = function(pageContainer) {
-    var scroller = new IScroll(pageContainer, {
+    var ptr = $(pageContainer).find('.pull-to-refresh-content')[0];
+    var options = {
         probeType: 2,
         mouseWheel: true
-    });
+    };
+    if(ptr) {
+        options.ptr = true;
+        options.ptrOffset = 44;
+    }
+    var scroller = new IScroll(pageContainer, options);
     pageContainer.scroller = scroller;
 };
 app.refreshScroller = function(container) { //如果未传入container，则取当前显示的page
