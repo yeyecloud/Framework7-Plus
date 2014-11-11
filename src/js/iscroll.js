@@ -654,7 +654,8 @@ IScroll.prototype = {
             return false;
         }
 
-        if(this.options.ptr && this.y >= 44) {
+        if(this.options.ptr && this.y >= 44 && this.startY * -1 < $(window).height()) {
+            // not trigger ptr when user want to scroll to top
             y = this.options.ptrOffset || 44;
             this._execEvent('ptr');
         }
