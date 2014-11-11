@@ -434,6 +434,11 @@ app.openModal = function (modal) {
         if (modal.hasClass('modal-out')) modal.trigger('closed');
         else modal.trigger('opened');
     });
+
+    var page = modal.find('.page');
+    if(page[0]) {
+        page[0].scroller.refresh();
+    }
     return true;
 };
 app.closeModal = function (modal) {
