@@ -307,10 +307,14 @@ label.label-checkbox {
                 background-color: @blue;
             }
             i.icon-form-checkbox:after {
-                background: no-repeat center;
-                background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 12 9' xml:space='preserve'><polygon fill='%23ffffff' points='12,0.7 11.3,0 3.9,7.4 0.7,4.2 0,4.9 3.9,8.8 3.9,8.8 3.9,8.8 '/></svg>");
-                -webkit-background-size: 12px 9px;
-                background-size: 12px 9px;
+                content: "\e605";
+                color: white;
+                font-size: 12px;
+                line-height: 22px;
+                padding-left: 2px;
+                position: static;
+                margin: 0px 0 0 2px;
+                font-family: 'icon';
             }
         }
     }
@@ -322,14 +326,21 @@ label.label-radio {
         ~ .item-inner {
             padding-right: 35px;
         }
-        &:checked ~ .item-inner{
-            background: no-repeat center;
-            background-image: url("data:image/svg+xml;charset=utf-8, <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 10'><polygon fill='%23007aff' points='11.6,0 4.4,7.2 1.4,4.2 0,5.6 4.4,10 4.4,10 4.4,10 13,1.4 '/></svg>");
-            background-position: 90% center;
-            background-position: ~"-webkit-calc(100% - 15px)" center;
-            background-position: ~"calc(100% - 15px)" center;
-            -webkit-background-size: 13px 10px;
-            background-size: 13px 10px;
+        ~ .item-inner:after {
+            content: "\e605";
+            color: @blue;
+            font-size: 12px;
+            font-family: "icon";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: 15px;
+            top: 50%;
+            margin-top: -8px;
+            display: none;
+        }
+        &:checked ~ .item-inner:after {
+            display: block;
         }
     }
 }
