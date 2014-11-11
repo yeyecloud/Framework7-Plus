@@ -483,7 +483,7 @@ var View = function (selector, params) {
     };
     view.refreshScroller = function() {
         app.refreshScroller(view.activePage.container);
-    }
+    };
 
     // Push State on load
     if (app.params.pushState && view.main) {

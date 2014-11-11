@@ -2042,7 +2042,7 @@ app.refreshScroller = function(container) { //如果未传入container，则取�
     } else {
         app.mainView.refreshScroller();
     }
-}
+};
 app.scrollTop = function(element, scrollTop, time) {
     var $element = $(element);
     time = time || 0;

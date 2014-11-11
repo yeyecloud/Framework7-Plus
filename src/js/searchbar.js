@@ -204,7 +204,7 @@ app.initSearchbar = function (pageContainer) {
         if (isVirtualList) {
             virtualList.filterItems(foundItems);
         }
-        searchList.parents(".page")[0].scroller.refresh();
+        searchList.parents('.page')[0].scroller.refresh();
     }
 
     // Destroy on page remove
