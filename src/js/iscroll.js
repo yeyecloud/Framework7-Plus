@@ -81,10 +81,8 @@ var utils = (function () {
         var t = + new Date();
         var l = t;
         function eventTrigger() {
-            console.log(+ new Date());
             if( + new Date() - l > 100) {
                 self._execEvent('scroll');
-                console.log('scroll');
                 l = + new Date();
             }
             if(+ new Date() - t < duration) {
