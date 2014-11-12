@@ -20,6 +20,11 @@
   width: 42px;
   height: 42px;
 }
+.ks-preloader-big:after {
+  font-size: 32px;
+  height: 42px;
+  line-height: 42px;
+}
 .statusbar-overlay {
   background: #000;
 }

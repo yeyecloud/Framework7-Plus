@@ -10,7 +10,7 @@
  *
  * Licensed under MIT
  *
- * Released on: November 11, 2014
+ * Released on: November 12, 2014
 */
 (function () {
 
@@ -3762,6 +3762,7 @@
                 sortableContainer = sortingEl.parents('.sortable');
                 e.preventDefault();
                 app.allowPanelOpen = app.allowSwipeout = false;
+                sortingEl.parents('.page')[0].scroller.disable();   //disable scroller when sort
             }
             function handleTouchMove(e) {
                 if (!isTouched || !sortingEl) return;
@@ -3837,6 +3838,7 @@
                 insertAfter = insertBefore = undefined;
                 isTouched = false;
                 isMoved = false;
+                sortingEl.parents('.page')[0].scroller.enable();   //enable scroller after sort
             }
             $(document).on(app.touchEvents.start, '.list-block.sortable .sortable-handler', handleTouchStart);
             if (app.support.touch) {
@@ -3847,7 +3849,6 @@
                 $(document).on(app.touchEvents.move, handleTouchMove);
                 $(document).on(app.touchEvents.end, handleTouchEnd);
             }
-                
         };
         
         /*===============================================================================
