@@ -2036,7 +2036,7 @@ IScroll.utils = utils;
 app.initScroller = function(pageContainer) {
     var ptr = $(pageContainer).find('.pull-to-refresh-content')[0];
     var options = {
-        probeType: 2,
+        probeType: 1,
         mouseWheel: true
     };
     if(ptr) {

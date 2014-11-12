@@ -228,6 +228,7 @@ var VirtualList = function (listBlock, params) {
     vl.attachEvents = function (detach) {
         var action = detach ? 'off' : 'on';
         vl.page[0].scroller[action]('scroll', vl.handleScroll);
+        vl.page[0].scroller[action]('scrollEnd', vl.handleScroll);  //there is a bug: when user touch end  but scroller is scroll because Inertia, the 'scroll' event won't trigger, so I listento scrollEnd event, but this is not the best solution
         $(window)[action]('resize', vl.handleResize);
     };
 
