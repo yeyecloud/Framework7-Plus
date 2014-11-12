@@ -4,6 +4,11 @@ var rAF = window.requestAnimationFrame  ||
     window.oRequestAnimationFrame       ||
     window.msRequestAnimationFrame      ||
     function (callback) { window.setTimeout(callback, 1000 / 60); };
+var cRAF = window.cancelRequestAnimationFrame  ||
+    window.webkitCancelRequestAnimationFrame  ||
+    window.mozCancelRequestAnimationFrame     ||
+    window.oCancelRequestAnimationFrame       ||
+    window.msCancelRequestAnimationFrame;
 
 var utils = (function () {
     var me = {};
@@ -51,7 +56,7 @@ var utils = (function () {
             pointerEvent;
     };
 
-    me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
+    me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration, self) {
         var distance = current - start,
             speed = Math.abs(distance) / time,
             destination,
@@ -71,6 +76,22 @@ var utils = (function () {
             distance = Math.abs(current) + destination;
             duration = distance / speed;
         }
+
+        //simple trigger, every 100ms
+        var t = + new Date();
+        var l = t;
+        function eventTrigger() {
+            console.log(+ new Date());
+            if( + new Date() - l > 100) {
+                self._execEvent('scroll');
+                console.log('scroll');
+                l = + new Date();
+            }
+            if(+ new Date() - t < duration) {
+                rAF(eventTrigger);
+            }
+        }
+        rAF(eventTrigger);
 
         return {
             destination: Math.round(destination),
@@ -582,8 +603,8 @@ IScroll.prototype = {
 
         // start momentum animation if needed
         if ( this.options.momentum && duration < 300 ) {
-            momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
-            momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration) : { destination: newY, duration: 0 };
+            momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration, this) : { destination: newX, duration: 0 };
+            momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0, this.options.deceleration, this) : { destination: newY, duration: 0 };
             newX = momentumX.destination;
             newY = momentumY.destination;
             time = Math.max(momentumX.duration, momentumY.duration);
