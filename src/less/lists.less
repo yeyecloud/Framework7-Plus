@@ -137,6 +137,7 @@
 
         .item-inner {
             padding-right: 35px;
+            position: relative;
             &:after {
                 font-family: "icon";
                 font-size: 18px;
@@ -280,6 +281,9 @@
             padding-top: 10px;
             padding-bottom: 9px;
             .align-self(stretch);
+            &:after {
+                display: none;
+            }
         }
         .item-link .item-inner {
             background: none;
@@ -287,9 +291,19 @@
         }
         .item-link .item-title-row {
             padding-right: 20px;
-            background: no-repeat right center;
-            background-image: url("data:image/svg+xml;charset=utf-8,<svg viewBox='0 0 60 120' xmlns='http://www.w3.org/2000/svg'><path d='m60 61.5-38.25 38.25-9.75-9.75 29.25-28.5-29.25-28.5 9.75-9.75z' fill='%23c7c7cc'/></svg>");
-            background-size: 10px 20px;
+            position: relative;
+            &:after {
+                font-family: "icon";
+                font-size: 18px;
+                position: absolute;
+                content: "\e608";
+                color: #bbb;
+                right: 0;
+                top: 50%;
+                margin-top: -12px;
+                width: 14px;
+                text-align: center;
+            }
         }
         .item-media {
             padding-top: 9px;
