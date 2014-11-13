@@ -3,12 +3,8 @@
     background: #fff;
 }
 .messages {
-    .flexbox();
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
+    clear: both;
+    overflow: hidden;
 }
 .messages-date {
     text-align: center;
@@ -17,20 +13,17 @@
     line-height: 1;
     margin: 10px 15px;
     color: #8e8e93;
+    float: left;
+    width: 100%;
     span {
         font-weight: 400;
     }
 }
 .message {
-    .border-box();
     margin: 1px 10px 0;
     max-width: 70%;
-    .flexbox();
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
+    float: left;
+    clear: both;
     &:first-child {
         margin-top: 10px;
     }
@@ -91,10 +84,7 @@
     }
 }
 .message-sent {
-    -ms-flex-item-align: end;
-    -webkit-align-self: flex-end;
-    align-self: flex-end;
-    .align-items(flex-end);
+    float: right;
     .message-name {
         margin-right: 16px;
     }
@@ -197,6 +187,38 @@
         .message-label {
             display: block;
         }
+    }
+}
+
+.toolbar.messagebar {
+    .toolbar-inner {
+        display: block;
+        margin: 0 55px 0 50px;
+        width: auto;
+        left: 0;
+        right: 0;
+        padding: 0;
+    }
+    a {
+        display: block;
+        float: left;
+        text-align: center;
+    }
+    .toolbar-inner a.icon-only {    //high priority
+        padding: 12px 4px;
+        font-size: 20px;
+        margin-left: -50px;
+    }
+    textarea {
+        display: block;
+        position: absolute;
+        top: 9px;
+        width: 100%;
+    }
+    textarea + a {
+        float: right;
+        margin: 0;
+        margin-right: -46px;
     }
 }
 html.retina.ios-6 {
