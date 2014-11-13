@@ -9,7 +9,6 @@
     padding: 0 8px;
     overflow: hidden;
     position: relative;
-    .flexbox();
     .align-items(center);
     html.retina.ios-gt-7 & {
         border-bottom-width: 0.5px;
@@ -18,7 +17,7 @@
         width: 100%;
         height: 28px;
         position: relative;
-        .flex-shrink(1);
+        padding: 8px 0;
         &:before {
             font-family: 'icon';
             font-size: 15px;
@@ -80,11 +79,14 @@
         font-size: 17px;
         cursor: pointer;
         opacity: 0;
-        .flex-shrink(0);
-        margin-left: 0;
+        margin: 0;
         pointer-events:none;
+        position: absolute;
+        right: 6px;
+        top: 10px;
     }
     &.searchbar-active {
+        padding-right: 66px;
         .searchbar-cancel {
             margin-left: 8px;
             opacity: 1;
@@ -94,6 +96,7 @@
                 .transition(0ms);
             }
         }
+
     }
     &.searchbar-not-empty {
         .searchbar-clear {
