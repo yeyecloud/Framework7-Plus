@@ -29,6 +29,9 @@ app.attachInfiniteScroll = function (infiniteContent) {
     pageContainer.scroller.on('scroll', function() {
         handleInfiniteScroll(pageContainer);
     });
+    pageContainer.scroller.on('scrollEnd', function() { //scroll won't trigger sometime
+        handleInfiniteScroll(pageContainer);
+    });
 };
 app.detachInfiniteScroll = function (infiniteContent) {
     $(infiniteContent).parent()[0].scroller.off('scroll', handleInfiniteScroll);
