@@ -75,7 +75,9 @@ app.initFastClicks = function () {
         if (tag === 'input' && skipInputs.indexOf(el.type) < 0) return true;
     }
     function targetNeedsPrevent(el) {
-        el = $(el);
+        return false;
+        //prevent default on label will cause switch bug on some android device(such as MI 3)
+        /*el = $(el);
         if (el.is('label') || el.parents('label').length > 0) {
             if (app.device.os === 'android') {
                 var osv = app.device.osVersion.split('.');
@@ -86,7 +88,7 @@ app.initFastClicks = function () {
             }
             else return false;
         }
-        return true;
+        return true;*/
     }
 
     // Mouse Handlers
@@ -146,7 +148,7 @@ app.initFastClicks = function () {
                 var parent = this;
                 if (parent.scrollHeight > parent.offsetHeight && !scrollParent) {
                     scrollParent = parent;
-                    scrollParent.f7ScrollTop = app.getScrollTop(scrollParent);
+                    scrollParent.f7ScrollTop = app.scrollTop(scrollParent);
                 }
             });
         }
@@ -215,7 +217,7 @@ app.initFastClicks = function () {
         trackClick = false;
 
         if (app.device.os === 'ios' && scrollParent) {
-            if ( app.getScrollTop(scrollParent) !== scrollParent.f7ScrollTop) {
+            if ( app.scrollTop(scrollParent) !== scrollParent.f7ScrollTop) {
                 return false;
             }
         }

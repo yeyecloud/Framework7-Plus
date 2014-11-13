@@ -5,7 +5,7 @@ function handleInfiniteScroll(pageContainer) {
     /*jshint validthis:true */
     var inf = $(pageContainer).find('.page-content');
     var scroller = pageContainer.scroller;
-    var scrollTop = app.getScrollTop(pageContainer);
+    var scrollTop = app.scrollTop(pageContainer);
     var scrollHeight = app.getScrollHeight(pageContainer);
     var height = pageContainer.offsetHeight;
     var distance = inf[0].getAttribute('data-distance');

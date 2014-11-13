@@ -2075,18 +2075,18 @@ app.refreshScroller = function(container) { //如果未传入container，则取�
 };
 app.scrollTop = function(element, scrollTop, time) {
     var $element = $(element);
-    time = time || 0;
-    if($element[0].scroller) {
-        return $element[0].scroller.scrollTo(0, -1 * scrollTop, time);
+    if(scrollTop === undefined) {
+        if($element[0].scroller) {
+            return -1 * $element[0].scroller.y;
+        }
+        return $element[0].scrollTop;
+    } else {
+        time = time || 0;
+        if($element[0].scroller) {
+            return $element[0].scroller.scrollTo(0, -1 * scrollTop, time);
+        }
+        $element[0].scrollTop = scrollTop;
     }
-    $element[0].scrollTop = scrollTop;
-};
-app.getScrollTop = function(element) {
-    var $element = $(element);
-    if($element[0].scroller) {
-        return -1 * $element[0].scroller.y;
-    }
-    return $element[0].scrollTop;
 };
 app.getScrollHeight = function(element) {
     var $element = $(element);
@@ -2095,3 +2095,5 @@ app.getScrollHeight = function(element) {
     }
     return $element[0].scrollHeight;
 };
+
+

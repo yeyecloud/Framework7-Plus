@@ -436,7 +436,7 @@ app.openModal = function (modal) {
     });
 
     var page = modal.find('.page');
-    if(page[0]) {
+    if(page[0] && page[0].scroller) {
         page[0].scroller.refresh();
     }
     return true;

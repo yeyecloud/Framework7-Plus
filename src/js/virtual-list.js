@@ -112,7 +112,7 @@ var VirtualList = function (listBlock, params) {
     // Render items
     vl.render = function (force) {
         if (force) vl.lastRepaintY = null;
-        var scrollTop = app.getScrollTop(vl.page);
+        var scrollTop = app.scrollTop(vl.page);
         if (vl.lastRepaintY === null || Math.abs(scrollTop - vl.lastRepaintY) > maxBufferHeight || (!updatableScroll && (scrollTop + pageHeight >= vl.pageContent[0].scrollHeight))) {
             vl.lastRepaintY = scrollTop;
         }

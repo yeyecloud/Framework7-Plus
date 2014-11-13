@@ -19,7 +19,7 @@ app.initPullToRefresh = function (pageContainer) {
 
     function handleScroll() {
         if(container.hasClass('refreshing')) return;
-        if(app.getScrollTop(page) * -1 >= 44) {
+        if(app.scrollTop(page) * -1 >= 44) {
             container.removeClass('pull-down').addClass('pull-up');
         } else {
             container.removeClass('pull-up').addClass('pull-down');
