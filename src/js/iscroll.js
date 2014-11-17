@@ -108,7 +108,7 @@ var utils = (function () {
     });
 
     // This should find all Android browsers lower than build 535.19 (both stock browser and webview)
-    me.isBadAndroid = /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion));
+    me.isBadAndroid = /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion)) && false;   //this will cause many android device scroll flash; so set it to false!
 
     me.extend(me.style = {}, {
         transform: _transform,
@@ -292,7 +292,10 @@ function IScroll (el, options) {
 
         HWCompositing: true,
         useTransition: true,
-        useTransform: true
+        useTransform: true,
+
+        //other options
+        eventPassthrough: undefined,    //if you  want to use native scroll, you can set to: true or horizontal
     };
 
     for ( var i in options ) {

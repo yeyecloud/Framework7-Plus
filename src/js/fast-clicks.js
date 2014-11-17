@@ -75,12 +75,13 @@ app.initFastClicks = function () {
         if (tag === 'input' && skipInputs.indexOf(el.type) < 0) return true;
     }
     function targetNeedsPrevent(el) {
-        //prevent default when android version <= 4.2.1
+        //not prevent default when android version <= 4.2.1 || version === 4.3
         el = $(el);
         if (el.is('label') || el.parents('label').length > 0) {
             if (app.device.os === 'android') {
                 var osv = app.device.osVersion.split('.');
-                if (osv[0] * 1 > 4 || (osv[0] * 1 === 4 && osv[1] * 1 > 2) || (osv[0] * 1 === 4 && osv[1] * 1 === 2 && osv[2] * 1 >= 2)) {
+                var notPrevent = (osv[0] * 1 > 4 || (osv[0] * 1 === 4 && osv[1] * 1 >= 4)) || (app.device.osVersion === '4.2.1') || (app.device.osVersion === '4.1.1') || (app.device.osVersion === '4.2.2') ;
+                if (notPrevent) {
                     return false;
                 }
                 else return true;
