@@ -77,6 +77,7 @@ module.exports = function (grunt) {
         framework7: framework7,
         // Metadata.
         pkg: grunt.file.readJSON('bower.json'),
+        distRoot: grunt.option('target') || 'build',
         banner: '/*\n' +
             ' * <%= pkg.name %> <%= pkg.version %>\n' +
             ' * <%= pkg.description %>\n' +
@@ -113,9 +114,9 @@ module.exports = function (grunt) {
                     cleancss: false
                 },
                 files: {
-                    'build/css/<%= framework7.filename %>.css' : ['src/less/<%= framework7.filename %>.less'],
-                    'build/css/<%= framework7.filename %>.rtl.css' : ['src/less/<%= framework7.filename %>.rtl.less'],
-                    'build/css/<%= framework7.filename %>.themes.css' : ['src/less/<%= framework7.filename %>.themes.less']
+                    '<%= distRoot %>/css/<%= framework7.filename %>.css' : ['src/less/<%= framework7.filename %>.less'],
+                    '<%= distRoot %>/css/<%= framework7.filename %>.rtl.css' : ['src/less/<%= framework7.filename %>.rtl.less'],
+                    '<%= distRoot %>/css/<%= framework7.filename %>.themes.css' : ['src/less/<%= framework7.filename %>.themes.less']
                 }
             },
             dist: {
@@ -249,11 +250,11 @@ module.exports = function (grunt) {
             },
             js: {
                 src: jsFilesList,
-                dest: 'build/js/<%= framework7.filename %>.js',
+                dest: '<%= distRoot %>/js/<%= framework7.filename %>.js',
             },
             css_build: {
-                src: ['build/css/<%= framework7.filename %>.css'],
-                dest: 'build/css/<%= framework7.filename %>.css'
+                src: ['<%= distRoot %>/css/<%= framework7.filename %>.css'],
+                dest: '<%= distRoot %>/css/<%= framework7.filename %>.css'
             },
             css_dist: {
                 src: ['dist/css/<%= framework7.filename %>.min.css'],
@@ -306,7 +307,7 @@ module.exports = function (grunt) {
                 reporter: require('jshint-stylish')
             },
             build: {
-                src: ['Gruntfile.js', 'build/js/framework7.js']
+                src: ['Gruntfile.js', '<%= distRoot %>/js/framework7.js']
             },
             custom: {
                 src: ['custom/js/<%= framework7.filename %>.custom.js']
@@ -361,7 +362,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'src/templates/',
                     src: ['*.jade'],
-                    dest: 'build/',
+                    dest: '<%= distRoot %>/',
                     ext: '.html'
                 }]
             },
@@ -448,25 +449,25 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'src/',
                         src: ['img/**'],
-                        dest: 'build/'
+                        dest: '<%= distRoot %>/'
                     },
                     {
                         expand: true,
                         cwd: 'src/my-app/',
                         src: ['my-app.css'],
-                        dest: 'build/css/'
+                        dest: '<%= distRoot %>/css/'
                     },
                     {
                         expand: true,
                         cwd: 'src/my-app/',
                         src: ['my-app.js'],
-                        dest: 'build/js/'
+                        dest: '<%= distRoot %>/js/'
                     },
                     {
                         expand: true,
                         cwd: 'src/fonts/',
                         src: ['*.eot', '*.tff', '*.woff', '*.svg'],
-                        dest: 'build/fonts/'
+                        dest: '<%= distRoot %>/fonts/'
                     }
                 ]
             },
@@ -474,7 +475,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: 'build/',
+                        cwd: '<%= distRoot %>/',
                         src: ['**'],
                         dest: 'dist/'
                     }

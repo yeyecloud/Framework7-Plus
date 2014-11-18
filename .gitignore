@@ -4,3 +4,5 @@ build
 custom
 npm-debug.log
 *.swp
+.package
+*.bak
