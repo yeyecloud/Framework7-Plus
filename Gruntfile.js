@@ -77,7 +77,7 @@ module.exports = function (grunt) {
         framework7: framework7,
         // Metadata.
         pkg: grunt.file.readJSON('bower.json'),
-        distRoot: grunt.option('target') || 'build',
+        distRoot: grunt.option('buildTo') || 'build',
         banner: '/*\n' +
             ' * <%= pkg.name %> <%= pkg.version %>\n' +
             ' * <%= pkg.description %>\n' +
