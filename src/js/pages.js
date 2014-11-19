@@ -81,6 +81,7 @@ app.pageInitCallback = function (view, params) {
     // Page Data
     var pageData = {
         container: pageContainer,
+        scroller: pageContainer.scroller,
         url: params.url,
         query: $.parseUrlQuery(params.url || ''),
         name: $(pageContainer).attr('data-page'),

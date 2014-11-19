@@ -52,6 +52,7 @@ app.initPullToRefresh = function (pageContainer) {
 app.pullToRefreshDone = function (container) {
     container = $(container);
     if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
+    if (container.length === 0) return;
     var scroller = container.parent()[0].scroller;
     scroller.refresh();
     scroller.scrollTo(0, 0, 200);

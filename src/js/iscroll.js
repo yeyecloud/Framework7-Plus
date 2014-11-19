@@ -2098,5 +2098,3 @@ app.getScrollHeight = function(element) {
     }
     return $element[0].scrollHeight;
 };
-
-
