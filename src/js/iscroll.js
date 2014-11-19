@@ -2057,6 +2057,7 @@ app.initScroller = function(pageContainer) {
     var ptr = $(pageContainer).find('.pull-to-refresh-content')[0];
     var options = {
         probeType: 1,
+        scrollbars: true,
         mouseWheel: true
     };
     if(ptr) {
