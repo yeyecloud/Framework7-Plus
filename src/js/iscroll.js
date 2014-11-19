@@ -2058,6 +2058,7 @@ app.initScroller = function(pageContainer) {
     var options = {
         probeType: 1,
         scrollbars: true,
+        fadeScrollbars: true,
         mouseWheel: true
     };
     if(ptr) {
