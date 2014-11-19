@@ -1633,13 +1633,13 @@ function createDefaultScrollbar (direction, interactive, type) {
 
     if ( direction === 'h' ) {
         if ( type === true ) {
-            scrollbar.style.cssText += ';height:7px;left:2px;right:2px;bottom:0';
+            scrollbar.style.cssText += ';height:5px;left:2px;right:2px;bottom:0';
             indicator.style.height = '100%';
         }
         scrollbar.className = 'iScrollHorizontalScrollbar';
     } else {
         if ( type === true ) {
-            scrollbar.style.cssText += ';width:7px;bottom:2px;top:2px;right:1px';
+            scrollbar.style.cssText += ';width:5px;bottom:2px;top:2px;right:1px';
             indicator.style.width = '100%';
         }
         scrollbar.className = 'iScrollVerticalScrollbar';
@@ -2059,7 +2059,7 @@ app.initScroller = function(pageContainer) {
         probeType: 1,
         scrollbars: true,
         fadeScrollbars: true,
-        shrinkScrollbars: true,
+        shrinkScrollbars: 'scale',
         mouseWheel: true
     };
     if(ptr) {
