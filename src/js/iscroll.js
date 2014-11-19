@@ -2059,6 +2059,7 @@ app.initScroller = function(pageContainer) {
         probeType: 1,
         scrollbars: true,
         fadeScrollbars: true,
+        shrinkScrollbars: true,
         mouseWheel: true
     };
     if(ptr) {
