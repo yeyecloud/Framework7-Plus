@@ -77,11 +77,11 @@ var utils = (function () {
             duration = distance / speed;
         }
 
-        //simple trigger, every 100ms
+        //simple trigger, every 50ms
         var t = + new Date();
         var l = t;
         function eventTrigger() {
-            if( + new Date() - l > 100) {
+            if( + new Date() - l > 50) {
                 self._execEvent('scroll');
                 l = + new Date();
             }
@@ -1152,9 +1152,7 @@ IScroll.prototype = {
 
         this.scrollTo(newX, newY, 0);
 
-        if ( this.options.probeType > 1 ) {
-            this._execEvent('scroll');
-        }
+        this._execEvent('scroll');
 
 // INSERT POINT: _wheel
     },
