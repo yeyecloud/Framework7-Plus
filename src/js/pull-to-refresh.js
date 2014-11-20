@@ -1,6 +1,7 @@
 /*======================================================
 ************   Pull To Refresh   ************
 ======================================================*/
+var refreshTime = 0;
 app.initPullToRefresh = function (pageContainer) {
     var eventsTarget = $(pageContainer);
     if (!eventsTarget.hasClass('pull-to-refresh-content')) {
@@ -31,9 +32,10 @@ app.initPullToRefresh = function (pageContainer) {
         container.addClass('refreshing');
         container.trigger('refresh', {
             done: function () {
-                app.pullToRefreshDone(container);
+              app.pullToRefreshDone(container);
             }
         });
+        refreshTime = + new Date();
     }
     scroller.on('scroll', handleScroll);
     scroller.on('ptr', handleRefresh);
@@ -53,10 +55,14 @@ app.pullToRefreshDone = function (container) {
     container = $(container);
     if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
     if (container.length === 0) return;
-    var scroller = container.parent()[0].scroller;
-    scroller.refresh();
-    scroller.scrollTo(0, 0, 200);
-    container.removeClass('refreshing');
+    var interval = (+ new Date()) - refreshTime;
+    var timeOut = interval > 500 ? 0 : 500 - interval;  //long than bounce time
+    setTimeout(function() {
+      var scroller = container.parent()[0].scroller;
+      scroller.refresh();
+      scroller.scrollTo(0, 0, 200);
+      container.removeClass('refreshing');
+    }, timeOut);
 };
 app.pullToRefreshTrigger = function (container) {
     container = $(container);
