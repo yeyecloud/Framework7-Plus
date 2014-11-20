@@ -2064,11 +2064,7 @@ app.initScroller = function(pageContainer) {
     var ptr = $(pageContainer).find('.pull-to-refresh-content')[0];
     var options = {
         probeType: 1,
-        scrollbars: true,
-        fadeScrollbars: true,
-        shrinkScrollbars: 'scale',
-        bounceTime: 400,
-        mouseWheel: true
+        mouseWheel: true,
     };
     if(ptr) {
         options.ptr = true;
