@@ -46,6 +46,9 @@ app.initScrollToolbars = function (pageContainer) {
         tabbarHidden = tabbar && tabbar.hasClass('toolbar-hidden');
 
 
+        if (previousScroll === currentScroll && !reachEnd) {  //some time, iscroll fire scroll event, but the scrolltop is the save
+          return;
+        }
         if (previousScroll > currentScroll || reachEnd) {
             action = 'show';
         }
@@ -57,6 +60,7 @@ app.initScrollToolbars = function (pageContainer) {
                 action = 'show';
             }
         }
+        console.log(action, previousScroll, currentScroll);
 
         if (action === 'show') {
             if (hasNavbar && hideNavbar && navbarHidden) {
@@ -104,5 +108,5 @@ app.destroyScrollToolbars = function (pageContainer) {
     if (scrollContent.length === 0) return;
     var handler = scrollContent[0].f7ScrollToolbarsHandler;
     if (!handler) return;
-    scrollContent.off('scroll', scrollContent[0].f7ScrollToolbarsHandler);
+    pageContainer[0].scroller.scroller.off('scroll', scrollContent[0].f7ScrollToolbarsHandler);
 };
