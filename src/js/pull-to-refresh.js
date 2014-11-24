@@ -56,7 +56,7 @@ app.pullToRefreshDone = function (container) {
     if (container.length === 0) container = $('.pull-to-refresh-content.refreshing');
     if (container.length === 0) return;
     var interval = (+ new Date()) - refreshTime;
-    var timeOut = interval > 500 ? 0 : 500 - interval;  //long than bounce time
+    var timeOut = interval > 1000 ? 0 : 1000 - interval;  //long than bounce time
     setTimeout(function() {
       var scroller = container.parent()[0].scroller;
       scroller.refresh();
