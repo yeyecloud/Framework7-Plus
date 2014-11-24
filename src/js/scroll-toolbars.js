@@ -60,7 +60,6 @@ app.initScrollToolbars = function (pageContainer) {
                 action = 'show';
             }
         }
-        console.log(action, previousScroll, currentScroll);
 
         if (action === 'show') {
             if (hasNavbar && hideNavbar && navbarHidden) {
