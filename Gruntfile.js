@@ -119,6 +119,17 @@ module.exports = function (grunt) {
                     '<%= distRoot %>/css/<%= framework7.filename %>.themes.css' : ['src/less/<%= framework7.filename %>.themes.less']
                 }
             },
+            build_min: {
+                options: {
+                    paths: ['less'],
+                    cleancss: true
+                },
+                files: {
+                    '<%= distRoot %>/css/<%= framework7.filename %>.min.css' : ['src/less/<%= framework7.filename %>.less'],
+                    '<%= distRoot %>/css/<%= framework7.filename %>.rtl.min.css' : ['src/less/<%= framework7.filename %>.rtl.less'],
+                    '<%= distRoot %>/css/<%= framework7.filename %>.themes.min.css' : ['src/less/<%= framework7.filename %>.themes.less']
+                }
+            },
             dist: {
                 options: {
                     paths: ['less'],
@@ -292,6 +303,10 @@ module.exports = function (grunt) {
             dist: {
                 src: ['dist/js/<%= framework7.filename %>.js'],
                 dest: 'dist/js/<%= framework7.filename %>.min.js',
+            },
+            build: {
+                src: ['<%= distRoot %>/js/<%= framework7.filename %>.js'],
+                dest: '<%= distRoot %>/js/<%= framework7.filename %>.min.js',
             },
             custom: {
                 options: {
@@ -499,8 +514,10 @@ module.exports = function (grunt) {
     this.registerTask('build', 'Builds a development version of <%= pkg.name %>', [
         'concat:js',
         'less:build',
+        'less:build_min',
         'concat:css_build',
         'jshint:build',
+        'uglify:build',
         'copy:build',
         'jade:build',
     ]);
