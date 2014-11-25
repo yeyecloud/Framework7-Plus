@@ -81,7 +81,7 @@ var utils = (function () {
         var t = + new Date();
         var l = t;
         function eventTrigger() {
-            if( + new Date() - l > 50) {
+            if( + new Date() - l > 100) {
                 self._execEvent('scroll');
                 l = + new Date();
             }
@@ -2085,7 +2085,7 @@ app.scrollTop = function(element, scrollTop, time) {
     var $element = $(element);
     if(scrollTop === undefined) {
         if($element[0].scroller) {
-            return -1 * $element[0].scroller.y;
+            return -1 * $element[0].scroller.getComputedPosition().y;
         }
         return $element[0].scrollTop;
     } else {

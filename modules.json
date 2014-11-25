@@ -21,6 +21,7 @@
             "src/less/pages.less",
             "src/less/toolbars.less",
             "src/less/toolbars-pages.less",
+            "src/less/fonts.less",
             "src/less/icons.less",
             "src/less/badges.less",
             "src/less/content-block.less",

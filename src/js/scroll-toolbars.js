@@ -46,7 +46,7 @@ app.initScrollToolbars = function (pageContainer) {
         tabbarHidden = tabbar && tabbar.hasClass('toolbar-hidden');
 
 
-        if (previousScroll === currentScroll && !reachEnd) {  //some time, iscroll fire scroll event, but the scrolltop is the save
+        if (previousScroll === currentScroll && !reachEnd) {  //some time, iscroll fire scroll event, but the scrolltop is the same
           return;
         }
         if (previousScroll > currentScroll || reachEnd) {
