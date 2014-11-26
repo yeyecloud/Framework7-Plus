@@ -2057,6 +2057,11 @@ app.initScroller = function(pageContainer) {
         options.ptr = true;
         options.ptrOffset = 44;
     }
+
+    // fix android 4.4.4 webview bug
+    if(app.device.android && app.device.osVersion === '4.4.4') {
+      options.HWCompositing = false;
+    }
     var scroller = new IScroll(pageContainer, options);
     pageContainer.scroller = scroller;
 };
