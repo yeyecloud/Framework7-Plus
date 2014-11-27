@@ -250,7 +250,7 @@ var utils = (function () {
 
 function IScroll (el, options) {
     this.wrapper = typeof el === 'string' ? document.querySelector(el) : el;
-	this.scroller = $(this.wrapper).find('.page-content')[0] || $(this.wrapper).find('.slider-container')[0];
+    this.scroller = $(this.wrapper).find('.page-content')[0] || $(this.wrapper).find('.slider-container')[0];
     this.scrollerStyle = this.scroller.style;       // cache style for better performance
 
     this.options = {
@@ -2061,6 +2061,7 @@ app.initScroller = function(pageContainer) {
     // fix android 4.4.4 webview bug
     if(app.device.android && app.device.osVersion === '4.4.4') {
       options.HWCompositing = false;
+      options.useTransform = false;
     }
     var scroller = new IScroll(pageContainer, options);
     pageContainer.scroller = scroller;
