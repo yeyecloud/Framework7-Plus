@@ -77,6 +77,20 @@ var utils = (function () {
             duration = distance / speed;
         }
 
+        //simple trigger, every 50ms
+        var t = + new Date();
+        var l = t;
+        function eventTrigger() {
+            if( + new Date() - l > 100) {
+                self._execEvent('scroll');
+                l = + new Date();
+            }
+            if(+ new Date() - t < duration) {
+                rAF(eventTrigger);
+            }
+        }
+        rAF(eventTrigger);
+
         return {
             destination: Math.round(destination),
             duration: duration
@@ -2049,9 +2063,8 @@ IScroll.utils = utils;
 app.initScroller = function(pageContainer) {
     var ptr = $(pageContainer).find('.pull-to-refresh-content')[0];
     var options = {
-        probeType: 3,
+        probeType: 1,
         mouseWheel: true,
-        deceleration: 0.0008
     };
     if(ptr) {
         options.ptr = true;
