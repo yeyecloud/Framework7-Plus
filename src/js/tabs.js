@@ -66,10 +66,7 @@ app.showTab = function (tab, tabLink) {
     if (tabLink && tabLink.length > 0) tabLink.addClass('active');
     if (oldTabLink && oldTabLink.length > 0) oldTabLink.removeClass('active');
 
-    var scroller = newTab.parents('.page')[0].scroller;
-    if(scroller) {
-        scroller.refresh();
-    }
+    app.refreshScroller(newTab.parents('.page'));
     
     return true;
 };

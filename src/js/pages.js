@@ -262,7 +262,7 @@ app.initPage = function (pageContainer) {
     // Init scroll toolbars
     if (app.initScrollToolbars) app.initScrollToolbars(pageContainer);
 
-    pageContainer.scroller.refresh();
+    app.refreshScroller(pageContainer);
 };
 app.reinitPage = function (pageContainer) {
     // Size navbars on page reinit

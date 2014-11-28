@@ -228,7 +228,7 @@ myApp.onPageInit('pull-to-refresh', function (page) {
             ptrContent.find('ul').prepend(linkHTML);
             // When loading done, we need to "close" it
             myApp.pullToRefreshDone();
-        }, 0);
+        }, 1000);
     });
 });
 

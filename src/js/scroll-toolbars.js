@@ -98,7 +98,7 @@ app.initScrollToolbars = function (pageContainer) {
             
         previousScroll = currentScroll;
     }
-    pageContainer[0].scroller.on('scroll', handleScroll);
+    app.getScroller(pageContainer).on('scroll', handleScroll);
     scrollContent[0].f7ScrollToolbarsHandler = handleScroll;
 };
 app.destroyScrollToolbars = function (pageContainer) {
@@ -107,5 +107,5 @@ app.destroyScrollToolbars = function (pageContainer) {
     if (scrollContent.length === 0) return;
     var handler = scrollContent[0].f7ScrollToolbarsHandler;
     if (!handler) return;
-    pageContainer[0].scroller.scroller.off('scroll', scrollContent[0].f7ScrollToolbarsHandler);
+    app.getScroller(pageContainer[0]).off('scroll', scrollContent[0].f7ScrollToolbarsHandler);
 };

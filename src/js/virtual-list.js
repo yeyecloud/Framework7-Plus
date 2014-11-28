@@ -105,7 +105,7 @@ var VirtualList = function (listBlock, params) {
 
         if (updatableScroll) {
             vl.ul.css({height: listHeight + 'px'});
-            vl.page[0].scroller.refresh();
+            app.refreshScroller(vl.page);
         }
     };
 
@@ -212,7 +212,7 @@ var VirtualList = function (listBlock, params) {
         if (vl.params.onItemsBeforeInsert) vl.params.onItemsBeforeInsert(vl, vl.fragment);
         vl.ul[0].appendChild(vl.fragment);
         if (vl.params.onItemsAfterInsert) vl.params.onFragmentAfterInsert(vl, vl.fragment);
-        vl.page[0].scroller.refresh();
+        app.refreshScroller(vl.page);
     };
 
     // Handle scroll event
@@ -227,7 +227,7 @@ var VirtualList = function (listBlock, params) {
 
     vl.attachEvents = function (detach) {
         var action = detach ? 'off' : 'on';
-        vl.page[0].scroller[action]('scroll', vl.handleScroll);
+        app.getScroller(vl.page)[action]('scroll', vl.handleScroll);
         $(window)[action]('resize', vl.handleResize);
     };
 

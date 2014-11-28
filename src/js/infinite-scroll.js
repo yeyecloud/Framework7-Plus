@@ -4,7 +4,7 @@
 function handleInfiniteScroll(pageContainer) {
     /*jshint validthis:true */
     var inf = $(pageContainer).find('.page-content');
-    var scroller = pageContainer.scroller;
+    var scroller = app.getScroller(pageContainer);
     var scrollTop = app.scrollTop(pageContainer);
     var scrollHeight = app.getScrollHeight(pageContainer);
     var height = pageContainer.offsetHeight;
@@ -34,7 +34,7 @@ app.attachInfiniteScroll = function (infiniteContent) {
     });
 };
 app.detachInfiniteScroll = function (infiniteContent) {
-    $(infiniteContent).parent()[0].scroller.off('scroll', handleInfiniteScroll);
+    app.getScroller($(infiniteContent).parent()).off('scroll', handleInfiniteScroll);
 };
 
 app.initInfiniteScroll = function (pageContainer) {

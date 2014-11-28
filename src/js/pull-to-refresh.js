@@ -10,7 +10,7 @@ app.initPullToRefresh = function (pageContainer) {
     if (eventsTarget.length === 0) return;
 
     var page = eventsTarget.hasClass('page') ? eventsTarget : eventsTarget.parents('.page');
-    var scroller = page[0].scroller;
+    var scroller = app.getScroller(page);
     var hasNavbar = false;
     if (page.find('.navbar').length > 0 || page.parents('.navbar-fixed, .navbar-through').length > 0 || page.hasClass('navbar-fixed') || page.hasClass('navbar-through')) hasNavbar = true;
     if (page.hasClass('no-navbar')) hasNavbar = false;
@@ -57,7 +57,7 @@ app.pullToRefreshDone = function (container) {
     if (container.length === 0) return;
     var interval = (+ new Date()) - refreshTime;
     var timeOut = interval > 1000 ? 0 : 1000 - interval;  //long than bounce time
-    var scroller = container.parent()[0].scroller;
+    var scroller = app.getScroller(container.parent());
     setTimeout(function() {
       scroller.refresh();
       container.removeClass('refreshing');
@@ -68,7 +68,8 @@ app.pullToRefreshTrigger = function (container) {
     if (container.length === 0) container = $('.pull-to-refresh-content');
     if (container.hasClass('refreshing')) return;
     container.addClass('refreshing');
-    container.parent()[0].scroller.scrollTo(0, 44, 200);
+    var scroller = app.getScroller(container.parent());
+    scroller.scrollTo(0, 44 + 1, 200);
     container.trigger('refresh', {
         done: function () {
             app.pullToRefreshDone(container);

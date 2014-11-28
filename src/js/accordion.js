@@ -27,7 +27,7 @@ app.accordionOpen = function (item) {
             content.css('height', '');
             item.trigger('closed');
         }
-        item.parents('.page')[0].scroller.refresh();
+        app.refreshScroller(item.parents('.page'));
     });
     item.trigger('open');
     item.addClass('accordion-item-expanded');
@@ -54,7 +54,7 @@ app.accordionClose = function (item) {
             content.css('height', '');
             item.trigger('closed');
         }
-        item.parents('.page')[0].scroller.refresh();
+        app.refreshScroller(item.parents('.page'));
     });
     item.trigger('close');
 };
