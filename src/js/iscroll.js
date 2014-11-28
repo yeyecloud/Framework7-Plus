@@ -2087,6 +2087,13 @@ app.refreshScroller = function(container) { //如果未传入container，则取�
         app.mainView.refreshScroller();
     }
 };
+app.getScroller = function(container) {
+  if(container) {
+    return $(container)[0].scroller;
+  } else {
+    return app.mainView.activePage.container.scroller;
+  }
+};
 app.scrollTop = function(element, scrollTop, time) {
     var $element = $(element);
     if(scrollTop === undefined) {
