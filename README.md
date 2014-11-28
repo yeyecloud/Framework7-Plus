@@ -9,7 +9,8 @@ Framework7-Plus的目标是修复F7在安卓4.0+上的兼容性问题，并且�
 F7-Plus影响最大的改动是用[iScroll](https://github.com/cubiq/iscroll)替换了原生的滚动条，但是除了增加了和滚动条相关的API和滚动容器的改变之外，并没有影响其他组件，包括下拉刷新和无限滚动等组件都保持和F7一样的API。滚动条相关的详细改动请参见 [iscroll滚动条](#iscroll)。
 一些基于flexbox布局的组件被修改成了兼容性更好的float布局，svg图标被替换成了iconfont，参见 [其他组件的修改](#other-components)。
 
-## <a id='iscroll'></a> iscroll滚动条
+<a name='iscroll'></a>
+## iscroll滚动条
 为了解决安卓上的F7-Plus 用 iScroll 替换了原生的滚动条，并且在pageInit阶段自动初始化了这个滚动条，这是一个影响最大的修改。
 一方面，他影响了滚动方式，F7中是 `.page-content` 内部滚动，修改之后，`.page-content`作为一个类似绝对定位的容器（`translate3D`)，内部不会滚动，而是作为一个整体在 `.page`容器中滚动条。可以理解为从 `.page-content` 内部的滚动变成了 `.page` 内部的滚动。
 另一方面，无法再使用原生的滚动条，取而代之的是一个iscroll的实例，这个实例存储在 `.page` 上的 `.scroller`属性中，你可以通过 类似这样的代码 `$$(".page")[0].scroller` 来获取滚动条实例，最好的方式是通过下面将要介绍的新API来操作。
@@ -33,7 +34,8 @@ F7-Plus 在 `pageinit` 的时候会自动初始化一个滚动条，并且把它
 2. 原生的滚动事件不可用，应该用 iScroll 的事件
 3. 任何导致 `.page-content` 高度变化的操作都要刷新滚动条。
 
-## <a id='other-components'></a> 其他组件的修改
+<a name="other-components"></a>
+## 其他组件的修改
 
 因为一些兼容性的问题，部分组件的CSS做了修改。如果你是从F7迁移的项目，并且定制过下面这些组件的样式，那么需要额外注意。
 
@@ -65,8 +67,8 @@ message 组件使用了 `flexbox` 布局，这里把 `.message` 改成了 float 
 
 搜索栏的 form是使用 `flexbox` 布局，改成了 `position: absolute` 的布局。
 
-
-## <a id='transfer'></a> F7迁移到F7-Plus
+<a name='transfer'></a>
+## F7迁移到F7-Plus
 
 F7-Plus 尽可能保证了原来的API不变，减少迁移难度。不过迁移的时候，除了替换掉F7的库之外，还是有一些需要修改的代码和需要注意的地方。
 - 首先需要修改的是所有和滚动条相关的逻辑，原生的滚动条被替换成了iScroll滚动条，并且滚动容器从 `.page-content` 变成了 `.page`，导致页面高度变化的操作之后需要刷新滚动条，具体参见 [iscroll滚动条](#iscroll)。
@@ -76,7 +78,8 @@ F7-Plus 尽可能保证了原来的API不变，减少迁移难度。不过迁移
 
 如果你对 Framework7 的兼容性有兴趣，可以继续阅读下一章。
 
-## <a id='compitable'></a> Framework7 在安卓上的主要兼容性问题
+<a name='compitable'></a>
+## Framework7 在安卓上的主要兼容性问题
 目前主要测试了如下几种设备：
 1. 三星 S4 (4.4.2)
 2. 三星 s3 (4.3)
