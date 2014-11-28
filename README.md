@@ -19,9 +19,11 @@ F7-Plus 在 `pageinit` 的时候会自动初始化一个滚动条，并且把它
 新增了这几个API：
 
 **app.getScroller(container)**
+
 获取滚动条示例，这个container应该是一个 `.page` 节点。如果你没有传入container，则自动获取当前显示的页面的滚动条。返回值是一个 iScroll 实例，它的API请参见 [iScroll](https://github.com/cubiq/iscroll)。
 
 **app.refreshScroller(container)**
+
 刷新滚动条。任何导致 `.page-content` 容器产生高度变化的操作之后，都需要刷新JS滚动条。不过F7的原生组件，包括下拉刷新，手风琴，标签页等已经自动做了刷新操作，不需要再次刷新。
 `container` 是一个 `.page` 节点，如果没有传入 `container` 参数，则直接刷新当前显示的页面。
 **注意，如果滚动条正在执行滚动动画，那么这时候刷新滚动条会导致页面闪一下，请避免在滚动的时候刷新滚动条。下拉刷新之后不要刷新滚动条，因为下拉刷新组件自己做了刷新操作。**
@@ -36,6 +38,7 @@ F7-Plus 在 `pageinit` 的时候会自动初始化一个滚动条，并且把它
 因为一些兼容性的问题，部分组件的CSS做了修改。如果你是从F7迁移的项目，并且定制过下面这些组件的样式，那么需要额外注意。
 
 **图标**
+
 SVG改成了iconfont，能更好兼容安卓手机。svg是通过 `background` 实现的，而iconfont一般是通过 `:before` 或者 `:after` 伪元素实现的。这个修改涉及到所有使用SVG图标的组件：
 - navbar
 - list view
@@ -51,12 +54,15 @@ SVG改成了iconfont，能更好兼容安卓手机。svg是通过 `background` �
 - notification
 
 **grid**
+
 栅格从 `flexbox` 布局改成了 `float` 布局，这个改动同时会导致样式的变化。flexbox布局的间距是固定的15px，而float布局的间距是一个百分比，也就意味着不同屏幕宽度下，间距大小是不同的。
 
 **message**
+
 message 组件使用了 `flexbox` 布局，这里把 `.message` 改成了 float 布局，因为 `flexbox` 容器无法完美自适应屏幕宽度。
 
 **searchbar**
+
 搜索栏的 form是使用 `flexbox` 布局，改成了 `position: absolute` 的布局。
 
 
@@ -85,23 +91,27 @@ F7-Plus 尽可能保证了原来的API不变，减少迁移难度。不过迁移
 主要兼容性问题是以下这些：
 
 **原生滚动条滚动时的闪烁问题**
+
 在低版本的安卓比如魅族MX2上，绝对定位 `position: absolute;` 或者使用了 `transform: translate3D;`的容器，在原生滚动条滚动的时候会有滚动延迟，视觉上就是这些容器在滚动时会闪烁。主要在swipeout,sortable list, accordion, photo browser这几个组件上有问题。
 现在已经解决，解决方法是把原生的滚动条替换成了JS滚动条，JS滚动条使用的是大名鼎鼎的 [iScroll](https://github.com/cubiq/iscroll)，基本可以达到和原生滚动条相同的性能。替换完成之后，因为JS滚动条在页面高度变化的时候需要手动更新，所以会增加一个新的 `app.refreshScroller` 接口。已有的所有组件都完成了改造，所以使用他们的时候是不需要手动调用 `refreshScroller`的。
 
 **内置的fast click库的bug**
+
 Framework7 内置了一个fast click库，它在处理label的prevent default逻辑上有问题（对所有低于 4.4的机型都不做 prevent default处理），这样会导致部分低于4.4的机型上label无法正确触发其中的radio或者checkbox的选择，影响到 form中使用label作为容器的 radio，checkbox，switch和smart select。现在修改了 prevent default的版本判断逻辑，在上述测试机上测试没有问题，不排除还会有其他机型上会出现无法选择的问题。
 
 **CSS calc 不支持**
+
 部分低于4.4的机型不支持 `calc` 函数，一些使用 `calc` 计算宽度的组件会出现宽度问题，主要包括：grid, search bar, messages等组件。现在已经把他们替换成了 `float` 或者 `absolute` 布局。
 
 **display: flex;不支持**
+
 部分低于 4.4 的机型不支持新的 `display: flex;` ，不过并不是所有的，小米M2是4.1.1却支持。不支持 `display: flex;` 的机型会自动降级到 `display: box;`，这是旧的flexbox规范，它的宽度适应没有新规范那么灵活，所以grid组件在这些机型上在同一个 row 中放入的列超出宽度之后，无法自动换到下一行。
 关于flexbox的新规范和旧规范，可以参考stackoverflow上的一个问题 [CSS3 Flexbox: display: box vs. flexbox vs. flex](http://stackoverflow.com/questions/16280040/css3-flexbox-display-box-vs-flexbox-vs-flex)
 现在的做法是把基于flexbox布局的grid，改成了基于 `float` 的布局。有一点和以前不一样，以前的布局是固定的15px 间距，现在变成一个百分比。
 另外一个是message组件，他用的也是 flexbox 布局，而flexbox容器的宽度无法完美自适应，已经把flex替换成了float布局。
 
 **background svg 支持不完全**
+
 测试下来，发现在三星 S3上部分背景图标无法显示，原因还不特别清楚，应该是他不支持在input这种特殊的元素上写background svg。现在已经将大部分 svg 图标替换成iconfont，测试没有问题。
 
 上面列出的是测试出的主要问题，很多组件的bug都是由上面这几个问题引发的。还有一些组件内部的零零碎碎的bug，而且肯定还有一些未发现的bug。不过解决完上述主要问题之后，基本可以在4.0以上版本的安卓设备上使用。
-
