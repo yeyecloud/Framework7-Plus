@@ -99,6 +99,7 @@ app.initScrollToolbars = function (pageContainer) {
         previousScroll = currentScroll;
     }
     app.getScroller(pageContainer).on('scroll', handleScroll);
+    app.getScroller(pageContainer).on('scrollEnd', handleScroll);
     scrollContent[0].f7ScrollToolbarsHandler = handleScroll;
 };
 app.destroyScrollToolbars = function (pageContainer) {
@@ -108,4 +109,5 @@ app.destroyScrollToolbars = function (pageContainer) {
     var handler = scrollContent[0].f7ScrollToolbarsHandler;
     if (!handler) return;
     app.getScroller(pageContainer[0]).off('scroll', scrollContent[0].f7ScrollToolbarsHandler);
+    app.getScroller(pageContainer[0]).off('scrollEnd', scrollContent[0].f7ScrollToolbarsHandler);
 };
