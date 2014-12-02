@@ -177,6 +177,11 @@ var Slider = function (container, params) {
         touchesCurrent.x = e.type === 'touchmove' ? e.targetTouches[0].pageX : e.pageX;
         touchesCurrent.y = e.type === 'touchmove' ? e.targetTouches[0].pageY : e.pageY;
 
+        var absX = Math.abs(touchesCurrent.x - touchesStart.x);
+        var absY = Math.abs(touchesCurrent.y - touchesStart.y);
+        if(absX === 0 && absY === 0) {
+            return;
+        }
         if (typeof isScrolling === 'undefined') {
             isScrolling = !!(isScrolling || Math.abs(touchesCurrent.y - touchesStart.y) > Math.abs(touchesCurrent.x - touchesStart.x));
         }
