@@ -62,6 +62,7 @@ var utils = (function () {
             destination,
             duration;
 
+        speed = speed > 1 ? 1 : speed;  //set max speed to 1
         deceleration = deceleration === undefined ? 0.0006 : deceleration;
 
         destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
