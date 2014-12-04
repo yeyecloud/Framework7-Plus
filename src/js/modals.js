@@ -429,7 +429,13 @@ app.openModal = function (modal) {
     modal.trigger('open');
 
     // Classes for transition in
-    if (!isLoginScreen) overlay.addClass('modal-overlay-visible');
+    if (!isLoginScreen) {
+      //fix transition flash bug
+      overlay.addClass('modal-overlay-show');
+      setTimeout(function() {
+        overlay.addClass('modal-overlay-visible');
+      }, 100);
+    }
     modal.removeClass('modal-out').addClass('modal-in').transitionEnd(function (e) {
         if (modal.hasClass('modal-out')) modal.trigger('closed');
         else modal.trigger('opened');
@@ -454,10 +460,16 @@ app.closeModal = function (modal) {
     if (isPopup){
         if (modal.length === $('.popup.modal-in').length) {
             overlay.removeClass('modal-overlay-visible');    
-        }  
+            setTimeout(function() {
+                overlay.removeClass('modal-overlay-show');
+            }, 500);
+        }
     }
     else {
-        overlay.removeClass('modal-overlay-visible');
+        overlay.removeClass('modal-overlay-visible');    
+        setTimeout(function() {
+            overlay.removeClass('modal-overlay-show');
+        }, 500);
     }
 
     modal.trigger('close');

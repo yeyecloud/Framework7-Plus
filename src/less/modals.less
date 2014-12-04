@@ -15,17 +15,21 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4);
+    background: black;
     z-index: 10600;
-    visibility: hidden;
+    display: none;
     opacity: 0;
     .transition(@modalDuration);
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
     &.modal-overlay-visible {
-        visibility: visible;
-        opacity: 1;
+        opacity: .4;
         html.ios & {
             .scrollable();
         }
+    }
+    &.modal-overlay-show {
+        display: block;
     }
 }
 .popup-overlay {
