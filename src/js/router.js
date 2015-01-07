@@ -532,7 +532,7 @@ app.router.load = function (view, options) {
     if (view.params.reloadPages === true) options.reload = true;
 
     if (!view.allowPageChange) return false;
-    if (url && view.url === url && !options.reload) return false;
+    if (url && view.url === url && !options.reload && !view.params.allowDuplicateUrls) return false;
     view.allowPageChange = false;
     if (app.xhr && view.xhr && view.xhr === app.xhr) {
         app.xhr.abort();
@@ -678,7 +678,6 @@ app.router._back = function (view, options) {
             navbarInners = viewContainer.find('.navbar-inner:not(.cached)');
             newNavbarInner.addClass('navbar-on-left').removeClass('cached');
         }
-        
         // Remove/hide previous page in force mode
         if (force) {
             var pageToRemove, navbarToRemove;
@@ -686,8 +685,8 @@ app.router._back = function (view, options) {
             
             if (dynamicNavbar) navbarToRemove = $(pageToRemove[0] && pageToRemove[0].f7RelatedNavbar || navbarInners[navbarInners.length - 2]);
             if (view.params.domCache && view.initialPages.indexOf(pageToRemove[0]) >= 0) {
-                if (pageToRemove.length) pageToRemove.addClass('cached');
-                if (dynamicNavbar && navbarToRemove.length) {
+                if (pageToRemove.length && pageToRemove[0] !== newPage[0]) pageToRemove.addClass('cached');
+                if (dynamicNavbar && navbarToRemove.length && navbarToRemove[0] !== newNavbarInner[0]) {
                     navbarToRemove.addClass('cached');
                 }
             }
@@ -715,9 +714,23 @@ app.router._back = function (view, options) {
         }
 
         oldPage = $(pagesInView[pagesInView.length - 1]);
+        if (view.params.domCache) {
+            if (oldPage[0] === newPage[0]) {
+                oldPage = pagesContainer.children('.page.page-on-center');
+                if (oldPage.length === 0 && view.activePage) oldPage = $(view.activePage.container);
+            }
+        }
             
         if (dynamicNavbar && !oldNavbarInner) {
             oldNavbarInner = $(navbarInners[navbarInners.length - 1]);
+            if (view.params.domCache) {
+                if (oldNavbarInner[0] === newNavbarInner[0]) {
+                    oldNavbarInner = navbar.children('.navbar-inner.navbar-on-center:not(.cached)');
+                }
+                if (oldNavbarInner.length === 0) {
+                    oldNavbarInner = navbar.children('.navbar-inner[data-page="'+oldPage.attr('data-page')+'"]');
+                }
+            }
             if (oldNavbarInner.length === 0 || newNavbarInner[0] === oldNavbarInner[0]) dynamicNavbar = false;
         }
 

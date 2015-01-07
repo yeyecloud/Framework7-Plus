@@ -39,7 +39,7 @@ var VirtualList = function (listBlock, params) {
     }
         
     // Append <ul>
-    vl.ul = vl.listBlock.children('ul');
+    vl.ul = vl.params.ul ? $(vl.params.ul) : vl.listBlock.children('ul');
     if (vl.ul.length === 0) {
         vl.listBlock.append('<ul></ul>');
         vl.ul = vl.listBlock.children('ul');
@@ -95,7 +95,7 @@ var VirtualList = function (listBlock, params) {
             }
         }
         else {
-            listHeight = items.length * vl.params.height;
+            listHeight = items.length * vl.params.height / vl.params.cols;
             rowsPerScreen = Math.ceil(pageHeight / vl.params.height);
             rowsBefore = vl.params.rowsBefore || rowsPerScreen * 2;
             rowsAfter = vl.params.rowsAfter || rowsPerScreen;
@@ -119,6 +119,7 @@ var VirtualList = function (listBlock, params) {
         else {
             return;
         }
+
         var items = vl.filteredItems || vl.items, 
             fromIndex, toIndex, heightBeforeFirstItem = 0, heightBeforeLastItem = 0;
         if (dynamicHeight) {
@@ -194,16 +195,19 @@ var VirtualList = function (listBlock, params) {
             // Append item to fragment
             vl.fragment.appendChild(item);
 
-            // Update list height with not updatable scroll
-            if (!updatableScroll) {
-                if (dynamicHeight) {
-                    vl.ul[0].style.height = heightBeforeLastItem + 'px';
-                }
-                else {
-                    vl.ul[0].style.height = (i + 1) * vl.params.height + 'px';
-                }
+        
+        }
+
+        // Update list height with not updatable scroll
+        if (!updatableScroll) {
+            if (dynamicHeight) {
+                vl.ul[0].style.height = heightBeforeLastItem + 'px';
+            }
+            else {
+                vl.ul[0].style.height = i * vl.params.height / vl.params.cols + 'px';
             }
         }
+            
 
         // Update list html
         if (vl.params.onBeforeClear) vl.params.onBeforeClear(vl, vl.fragment);

@@ -7,7 +7,7 @@ app.initPullToRefresh = function (pageContainer) {
     if (!eventsTarget.hasClass('pull-to-refresh-content')) {
         eventsTarget = eventsTarget.find('.pull-to-refresh-content');
     }
-    if (eventsTarget.length === 0) return;
+    if (!eventsTarget || eventsTarget.length === 0) return;
 
     var page = eventsTarget.hasClass('page') ? eventsTarget : eventsTarget.parents('.page');
     var scroller = app.getScroller(page);
@@ -75,4 +75,11 @@ app.pullToRefreshTrigger = function (container) {
             app.pullToRefreshDone(container);
         }
     });
+};
+
+app.destroyPullToRefresh = function (pageContainer) {
+    pageContainer = $(pageContainer);
+    var pullToRefreshContent = pageContainer.hasClass('pull-to-refresh-content') ? pageContainer : pageContainer.find('.pull-to-refresh-content');
+    if (pullToRefreshContent.length === 0) return;
+    if (pullToRefreshContent[0].f7DestroyPullToRefresh) pullToRefreshContent[0].f7DestroyPullToRefresh();
 };

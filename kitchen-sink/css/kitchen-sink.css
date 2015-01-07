@@ -45,6 +45,9 @@
   -ms-transform: none;
   -o-transform: none;
   transform: none;
+  -webkit-transition: 0ms;
+  -o-transition: 0ms;
+  transition: 0ms;
 }
 .page[data-page="tabbar-labels"] .page-content {
   padding-bottom: 50px;
@@ -171,7 +174,7 @@ i.ks-tabbar-icon-4 {
 .ks-slider-custom .slider-prev-button {
   left: 0;
 }
-.virtual-list li {
+.page[data-page="virtual-list"] .virtual-list li {
   height: 63px;
 }
 .custom-accordion {

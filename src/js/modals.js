@@ -20,7 +20,8 @@ app.modal = function (params) {
         var textHTML = params.text ? '<div class="modal-text">' + params.text + '</div>' : '';
         var afterTextHTML = params.afterText ? params.afterText : '';
         var noButtons = !params.buttons || params.buttons.length === 0 ? 'modal-no-buttons' : '';
-        modalHTML = '<div class="modal ' + noButtons + '"><div class="modal-inner">' + (titleHTML + textHTML + afterTextHTML) + '</div><div class="modal-buttons">' + buttonsHTML + '</div></div>';
+        var verticalButtons = params.verticalButtons ? 'modal-buttons-vertical' : '';
+        modalHTML = '<div class="modal ' + noButtons + '"><div class="modal-inner">' + (titleHTML + textHTML + afterTextHTML) + '</div><div class="modal-buttons ' + verticalButtons + '">' + buttonsHTML + '</div></div>';
     }
     
     _modalTemplateTempDiv.innerHTML = modalHTML;
@@ -261,7 +262,7 @@ app.popover = function (modal, target, removeOnClose) {
     if (typeof removeOnClose === 'undefined') removeOnClose = true;
     if (typeof modal === 'string' && modal.indexOf('<') >= 0) {
         var _modal = document.createElement('div');
-        _modal.innerHTML = $.trim(modal);
+        _modal.innerHTML = modal.trim();
         if (_modal.childNodes.length > 0) {
             modal = _modal.childNodes[0];
             if (removeOnClose) modal.classList.add('remove-on-close');
@@ -375,7 +376,7 @@ app.popup = function (modal, removeOnClose) {
     if (typeof removeOnClose === 'undefined') removeOnClose = true;
     if (typeof modal === 'string' && modal.indexOf('<') >= 0) {
         var _modal = document.createElement('div');
-        _modal.innerHTML = $.trim(modal);
+        _modal.innerHTML = modal.trim();
         if (_modal.childNodes.length > 0) {
             modal = _modal.childNodes[0];
             if (removeOnClose) modal.classList.add('remove-on-close');

@@ -8,7 +8,7 @@ window.Framework7 = function (params) {
     var app = this;
 
     // Version
-    app.version = '0.9.8';
+    app.version = '0.10.0';
 
     // Default Parameters
     app.params = {
@@ -20,6 +20,7 @@ window.Framework7 = function (params) {
         uniqueHistory: false,
         uniqueHistoryIgnoreGetParameters: false,
         dynamicPageUrl: 'content-{{index}}',
+        allowDuplicateUrls: false,
         router: true,
         // Push State
         pushState: false,
@@ -70,6 +71,7 @@ window.Framework7 = function (params) {
         swipePanel: false, // or 'left' or 'right'
         swipePanelActiveArea: 0,
         swipePanelCloseOpposite: true,
+        swipePanelOnlyClose: false,
         swipePanelNoFollow: false,
         swipePanelThreshold: 0,
         panelsCloseByOutside: true,
