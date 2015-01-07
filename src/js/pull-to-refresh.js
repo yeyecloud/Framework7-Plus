@@ -41,10 +41,16 @@ app.initPullToRefresh = function (pageContainer) {
     scroller.on('ptr', handleRefresh);
 
     // Detach Events on page remove
-    if (page.length === 0) return;
-    function detachEvents() {
+    function destroyPullToRefresh() {
         scroller.off('scroll', handleScroll);
         scroller.off('ptr', handleRefresh);
+    }
+    eventsTarget[0].f7DestroyPullToRefresh = destroyPullToRefresh; 
+
+    // Detach Events on page remove
+    if (page.length === 0) return;
+    function detachEvents() {
+        destroyPullToRefresh();
         page.off('pageBeforeRemove', detachEvents);
     }
     page.on('pageBeforeRemove', detachEvents);
