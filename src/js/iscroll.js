@@ -63,9 +63,8 @@ var utils = (function () {
             duration;
 
         var absDistance = Math.abs(distance);
-        if(absDistance < 100) speed = speed * absDistance / 100;  //slow down a short touch move;
         speed = speed / 2; //slowdown
-        speed = speed > 1 ? 1 : speed;  //set max speed to 1
+        speed = speed > 1.5 ? 1.5 : speed;  //set max speed to 1
         deceleration = deceleration === undefined ? 0.0006 : deceleration;
 
         destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );

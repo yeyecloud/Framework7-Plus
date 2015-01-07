@@ -460,16 +460,12 @@ app.closeModal = function (modal) {
     if (isPopup){
         if (modal.length === $('.popup.modal-in').length) {
             overlay.removeClass('modal-overlay-visible');    
-            setTimeout(function() {
-                overlay.removeClass('modal-overlay-show');
-            }, 500);
+            overlay.removeClass('modal-overlay-show');
         }
     }
     else {
         overlay.removeClass('modal-overlay-visible');    
-        setTimeout(function() {
-            overlay.removeClass('modal-overlay-show');
-        }, 500);
+        overlay.removeClass('modal-overlay-show');
     }
 
     modal.trigger('close');
@@ -489,12 +485,14 @@ app.closeModal = function (modal) {
                 modal.remove();
             }
         });
+        modal.remove();
     }
     else {
         modal.removeClass('modal-in modal-out').trigger('closed').hide();
         if (removeOnClose) {
             modal.remove();
         }
+        modal.remove();
     }
     return true;
 };
